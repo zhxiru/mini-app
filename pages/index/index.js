@@ -1,10 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
+import adsModel from '../../models/ads';
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Hello Worldhahah',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -16,6 +17,7 @@ Page({
     })
   },
   onLoad: function () {
+    this.fetchAdsData();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -44,11 +46,20 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  // 获取广告数据
+  fetchAdsData: function() {
+    adsModel.getAdsData({'ads_type': 17, width: 750, height: 130}).then((result) => {
+        if (result && result.code === 200) {
+            this.setData({
+                adsData: result.data
+            })
+        }
+    })
+},
 })

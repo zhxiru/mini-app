@@ -19,3 +19,8 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.banner-ads {
+  width: 750rpx;
+  height: 315rpx;
+}
